@@ -1,15 +1,22 @@
 require 'rails_helper'
 include RandomData
 
-RSpec.describe Comment, type: :model do
+RSpec.describe SponsoredPost, type: :model do
   let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
-  let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
   let(:sponsored_post) { topic.sponsored_posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, price: 99) }
-  let(:comment) { Comment.create!(body: 'Comment Body', post: post) }
+
+  it { should belong_to(:topic) }
   
   describe "attributes" do
+    it "should respond to title" do
+      expect(sponsored_post).to respond_to(:title)
+    end
     it "should respond to body" do
-      expect(comment).to respond_to(:body)
+      expect(sponsored_post).to respond_to(:body)
+    end
+    
+    it "should respond to body" do
+      expect(sponsored_post).to respond_to(:price)
     end
   end
 end
