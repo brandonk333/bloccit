@@ -63,7 +63,7 @@ class TopicsController < ApplicationController
   end
   
   def authorize_user
-    if (current_user.moderator? && (params[:action] == 'create' || params[:action] == 'destroy')) || !current_user.admin?
+    if (current_user.moderator? && ['new', 'create', 'destroy'].include?(action_name)) || current_user.member?
 #    unless current_user.admin?
       flash[:alert] = "You do not have permission to do that."
       redirect_to topics_path
