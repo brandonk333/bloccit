@@ -3,9 +3,9 @@ class FavoriteMailer < ApplicationMailer
   
   def new_comment(user, post, comment)
  
-    headers["Message-ID"] = "<comments/#{comment.id}@lit-plateau-9283.example>"
-    headers["In-Reply-To"] = "<post/#{post.id}@lit-plateau-9283.example>"
-    headers["References"] = "<post/#{post.id}@lit-plateau-9283.example>"
+    headers["Message-ID"] = "<comments/#{comment.id}@lit-plateau-9283.git>"
+    headers["In-Reply-To"] = "<post/#{post.id}@lit-plateau-9283.git>"
+    headers["References"] = "<post/#{post.id}@lit-plateau-9283.git>"
  
     @user = user
     @post = post
@@ -13,4 +13,14 @@ class FavoriteMailer < ApplicationMailer
  
     mail(to: user.email, subject: "New comment on #{post.title}")
   end
+  
+  def new_post(post)
+    headers["Message-ID"] = "<posts/#{post.id}@lit-plateau-9283.git>"
+    headers["In-Reply-To"] = "<post/#{post.id}@lit-plateau-9283.git>"
+    headers["References"] = "<post/#{post.id}@lit-plateau-9283.git>"
+    
+    @post = post
+    
+    mail(to: post.user.email, subject: "You're following, #{post.title}!")
+  end 
 end
