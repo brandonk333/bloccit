@@ -32,6 +32,18 @@ class User < ActiveRecord::Base
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
   
+  def has_posts?
+    posts.count > 0
+  end
+
+  def has_comments?
+    comments.count > 0
+  end
+
+  def has_favorites?
+    favorites.count > 0
+  end
+  
   def generate_auth_token
     loop do
       self.auth_token = SecureRandom.base64(64)
