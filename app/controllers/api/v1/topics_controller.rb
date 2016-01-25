@@ -22,16 +22,16 @@ class Api::V1::TopicsController < Api::V1::BaseController
     end
   end
  
-  #def create
-    #topic = Topic.new(topic_params)
+  def create
+    topic = Topic.new(topic_params)
  
-    #if topic.valid?
-      #topic.save!
-      #render json: topic.to_json, status: 201
-    #else
-      #render json: {error: "Topic is invalid", status: 400}, status: 400
-    #end
-  #end
+    if topic.valid?
+      topic.save!
+      render json: topic.to_json, status: 201
+    else
+      render json: {error: "Topic is invalid", status: 400}, status: 400
+    end
+  end
   
   def create_post
     topic = Topic.find(params[:id])
